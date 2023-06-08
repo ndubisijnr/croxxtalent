@@ -90,7 +90,7 @@
 </script>
 
 <template>
-  <div class="wrapper">
+  <div class="wrapper animate__animated animate__fadeIn">
       <div class="sidebar">
         <div class="inner-sidebar">
           <img src="https://croxxtalent.com/images/logo.png" class="logo" />
@@ -382,5 +382,22 @@
   gap: 20px;
   padding: 10px;
   align-items: center;
+}
+
+.route-enter-from{
+  opacity: 0;
+  /*transform: translateX(100px);*/
+}
+
+.route-enter-active{
+  transition:all 0.1s linear;
+}
+
+.route-leave-to{
+  opacity: 0;
+  /*transform: translateX(-100px);*/
+}
+.route-leave-active{
+  transition:all 0.1s linear;
 }
 </style>
