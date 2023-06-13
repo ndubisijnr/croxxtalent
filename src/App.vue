@@ -2,37 +2,50 @@
   import DataCard from "../src/components/DataCard.vue"
   import {reactive} from "vue";
   import {onMounted} from "vue";
+  import dashboard from '../src/assets/vuesax/linear/vuesax/linear/element-3.svg';
+  import settings from  '../src/assets/vuesax/linear/vuesax/linear/setting.svg';
+  import search from  '../src/assets/vuesax/linear/vuesax/linear/search-normal.svg';
+  import employment from  '../src/assets/vuesax/linear/vuesax/linear/briefcase.svg';
+  import talent from  '../src/assets/vuesax/linear/vuesax/linear/user-octagon.svg';
+  import activation from  '../src/assets/vuesax/linear/clipboard-tick.svg'
+  import global from  '../src/assets/vuesax/linear/vuesax/linear/global.svg';
+  import candidate from  '../src/assets/vuesax/linear/vuesax/linear/profile-2user.svg';
+  import teacher from  '../src/assets/vuesax/linear/vuesax/linear/teacher.svg';
+  import vet from  '../src/assets/vuesax/linear/vuesax/linear/check.svg';
+  import profile from '../src/assets/img.png'
+
 
   const navs = [
-    {name:'Dashboard',icon:'fa-solid fa-border-all',children:''},
-    {name:'System panel',icon:'fa-solid fa-gear',children:[
+    {name:'Dashboard',icon:dashboard,children:''},
+    {name:'System panel',icon:settings,children:[
         {name:'Industry',icon:''},
         {name:'Competency',icon:''},
       ]
     },
-    {name:'Finder',icon:'fa-solid fa-magnifying-glass',children:''},
-    {name:'Activation',icon:'fa-regular fa-paste',children:''},
-    {name:'Vetting',icon:'fa-solid fa-shield-cat',children:''},
-    {name:'Employers list',icon:'fa-solid fa-briefcase',children:''},
-    {name:'Global mobility',icon:'fa-solid fa-globe',children:''},
-    {name:'Candidate',icon:'fa-solid fa-user-group',children:''},
-    {name:'Professionals',icon:'fa-solid fa-graduation-cap',children:[
+    {name:'Finder',icon:search,children:''},
+    {name:'Activation',icon:activation,children:''},
+    {name:'Vetting',icon:vet,children:''},
+    {name:'Employers list',icon:employment,children:''},
+    {name:'Talent list',icon:talent,children:''},
+    {name:'Global mobility',icon:global,children:''},
+    {name:'Candidate',icon:candidate,children:''},
+    {name:'Professionals',icon:teacher,children:[
         {name:'Professionals',icon:''},
         {name:'Recruit',icon:''},
       ]},
   ]
 
   let data2 = [
-    {name:'Nancy Tukura', level:'Basic', score:'75%', attempt:'3',info:'Rainoil . Warri, Rivers . Full-Time'},
-    {name:'Nancy Tukura', level:'Intermediate', score:'75%', attempt:'3',info:'Rainoil . Warri, Rivers . Full-Time'},
-    {name:'Nancy Tukura', level:'Expert', score:'75%', attempt:'3',info:'Rainoil . Warri, Rivers . Full-Time'},
-    {name:'Nancy Tukura', level:'Basic', score:'75%', attempt:'3',info:'Rainoil . Warri, Rivers . Full-Time'},
-    {name:'Nancy Tukura', level:'Expert', score:'75%', attempt:'3',info:'Rainoil . Warri, Rivers . Full-Time'},
-    {name:'Nancy Tukura', level:'Basic', score:'75%', attempt:'3',info:'Rainoil . Warri, Rivers . Full-Time'},
-    {name:'Nancy Tukura', level:'Intermediate', score:'75%', attempt:'3',info:'Rainoil . Warri, Rivers . Full-Time'},
-    {name:'Nancy Tukura', level:'Expert', score:'75%', attempt:'3',info:'Rainoil . Warri, Rivers . Full-Time'},
-    {name:'Nancy Tukura', level:'Basic', score:'75%', attempt:'3',info:'Rainoil . Warri, Rivers . Full-Time'},
-    {name:'Nancy Tukura', level:'Intermediate', score:'75%', attempt:'3',info:'Rainoil . Warri, Rivers . Full-Time'},
+    {profile:profile,name:'Nancy Tukura', level:'Basic', score:'75%', attempt:'3',info:'Rainoil . Warri, Rivers . Full-Time'},
+    {profile:profile,name:'Nancy Tukura', level:'Intermediate', score:'75%', attempt:'3',info:'Rainoil . Warri, Rivers . Full-Time'},
+    {profile:profile,name:'Nancy Tukura', level:'Expert', score:'75%', attempt:'3',info:'Rainoil . Warri, Rivers . Full-Time'},
+    {profile:profile,name:'Nancy Tukura', level:'Basic', score:'75%', attempt:'3',info:'Rainoil . Warri, Rivers . Full-Time'},
+    {profile:profile,name:'Nancy Tukura', level:'Expert', score:'75%', attempt:'3',info:'Rainoil . Warri, Rivers . Full-Time'},
+    {profile:profile,name:'Nancy Tukura', level:'Basic', score:'75%', attempt:'3',info:'Rainoil . Warri, Rivers . Full-Time'},
+    {profile:profile,name:'Nancy Tukura', level:'Intermediate', score:'75%', attempt:'3',info:'Rainoil . Warri, Rivers . Full-Time'},
+    {profile:profile,name:'Nancy Tukura', level:'Expert', score:'75%', attempt:'3',info:'Rainoil . Warri, Rivers . Full-Time'},
+    {profile:profile,name:'Nancy Tukura', level:'Basic', score:'75%', attempt:'3',info:'Rainoil . Warri, Rivers . Full-Time'},
+    {profile:profile,name:'Nancy Tukura', level:'Intermediate', score:'75%', attempt:'3',info:'Rainoil . Warri, Rivers . Full-Time'},
   ]
 
 
@@ -41,7 +54,8 @@
     active:'all',
     currentPage:1,
     itemPerPage:4,
-    icon_to_drop:null
+    icon_to_drop:null,
+    isActive:4
   })
 
   const paginate = (arr) => {
@@ -92,17 +106,19 @@
 <template>
   <div class="wrapper animate__animated animate__fadeIn">
       <div class="sidebar">
-        <div class="inner-sidebar">
+        <div class="logo-div">
           <img src="https://croxxtalent.com/images/logo.png" class="logo" />
-
-          <div v-for="i in navs" :key="i" class="nav-items" :class="{'active':i.name === 'Vetting'}">
-            <i :class="i.icon"></i>
-            <div>
-              <span>{{ i.name }}</span>
-              <i  @click="data.dropdown = !data.dropdown, handleDropdown(i)" :class="data.dropdown ? 'fa-solid fa-chevron-down':'fa-solid fa-chevron-up'" v-if="i.children" style="margin-left: 20px"></i>
+        </div>
+        <div class="inner-sidebar">
+          <div v-for="(i, index) in navs" :key="index" class="nav-items" :class="{'active':i.name === 'Vetting'}">
+            <div class="indicator" v-if="data.isActive == index"></div>
+            <img :src="i.icon" />
+            <div style="width: 100%;">
+              <span class="link-name">{{ i.name }}</span>
+              <img  @click="data.dropdown = !data.dropdown, handleDropdown(i)" :src="data.dropdown ? '../src/assets/Button/vuesax/linear/vuesax/linear/Vector.svg':'../src/assets/Button/Vector.svg'" v-if="i.children" style="margin-left: 20px" />
               <div v-if="i.children" class="nav-items-children-wrapper-active" :id="i.name">
                 <div v-for="j in i.children" class="nav-items-children">
-                  <span>{{j.name}}</span>
+                  <span class="span-link-name">{{j.name}}</span>
                 </div>
               </div>
             </div>
@@ -114,18 +130,17 @@
           <div class="top-header-inner">
             <h3 class="system-panel">System Panel</h3>
             <div class="top-header-icon-area">
-              <i class="fa-regular fa-message"></i>
-              <i class="fa-regular fa-bell"></i>
+              <img src="../src/assets/vuesax/linear/message-text.png">
+              <img src="../src/assets/vuesax/linear/notification.svg">
             </div>
           </div>
-
         </div>
         <div class="mid-header">
           <span class="industry">Industry</span>
           <span class="breaker"></span>
           <div>
             <span class="energy_sector">Energy sector </span>
-            <i  class="fa-solid fa-chevron-down"></i>
+            <img  src="../src/assets/Button/vuesax/linear/vuesax/linear/Vector.svg" />
           </div>
         </div>
         <div class="lower-mid">
@@ -146,17 +161,18 @@
           <span @click="data.active = 'Pressure jobs'" class="item" :class="{'active1':data.active === 'Pressure jobs'}">Pressure jobs</span>
           <div class="navi">
             <div class="chevron"> <i  class="fa-solid fa-chevron-left" style="color: white;"></i></div>
-            <div class="chevron"><i  class="fa-solid fa-chevron-right" style="color: white"></i></div>
+            <div class="chevron"> <img  src="../src/assets/Button/vuesax/bold/vuesax/bold/Vector.svg" />
+            </div>
           </div>
         </div>
         <div class="mid-main" v-if="data.active === 'all'">
           <div>
-            <data-card v-for="i in paginate(data2)" :key="i.name"  :score="i.score" :Attempt="i.attempt" :name="i.name" :info="i.info" :level="i.level" />
+            <data-card v-for="i in paginate(data2)" :profile="i.profile" :key="i.name"  :score="i.score" :Attempt="i.attempt" :name="i.name" :info="i.info" :level="i.level" />
           </div>
           <div>
-            <i @click="previousPage()" :disabled="data.currentPage === 1" class="fa-solid fa-chevron-left"></i>
-            <span @click="data.currentPage = i" v-for="i in totalPages()" class="pan" :class="{'active_pan':i === data.currentPage}">{{i}}</span>
-            <i @click="nextPage()" :disabled="data.currentPage === totalPages()" class="fa-solid fa-chevron-right"></i>
+            <img style="cursor: pointer" @click="previousPage()" :disabled="data.currentPage === 1" class="fa-solid fa-chevron-left" src="../src/assets/Button/Button/Vector.svg" />
+            <span style="cursor: pointer" @click="data.currentPage = i" v-for="i in totalPages()" class="pan" :class="{'active_pan':i === data.currentPage}">{{i}}</span>
+            <img style="cursor: pointer" @click="nextPage()" :disabled="data.currentPage === totalPages()" src="../src/assets/Button/Vector.svg" />
           </div>
         </div>
       </div>
@@ -164,9 +180,38 @@
 </template>
 
 <style scoped>
-.system-panel{
+*{
+  font-family: 'Poppins';
+}
+
+.indicator{
+  width: 4px;
+  height: 32px;
+  position: absolute;
+  background: #0040A1;
+  border-radius: 40px;
+  margin-left: -39px;
+}
+
+.link-name{
+  font-weight: 500;
+  font-size: 16px;
+  color: #282929;
 
 }
+.logo-div{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: start;
+  gap: 8px;
+  /*border: solid;*/
+
+  width: 228px;
+  margin-bottom: 33px;
+
+}
+
 .navi{
   display: flex;
   align-items: center;
@@ -186,10 +231,19 @@
   font-size: 20px;
 }
 
-.active_pan{
-  background-color: #111178;
-  color: white;
+.span-link-name{
+  font-weight: 500;
+  font-size: 12px;
 
+  color: #282929;
+}
+
+.active_pan{
+  color: white;
+  width: 46px;
+  height: 46px;
+  background: #0040A1;
+  padding: 10px 12px;
 }
 
 .energy_sector{
@@ -212,11 +266,13 @@
   align-items: center;
   justify-content: start;
   gap: 50px;
-  width: 90%;
-  border: solid .5px;
-  padding: 8px;
-  border-radius:10px;
+  width: 92%;
   margin: 20px 45px;
+  height: 49px;
+  background: #FFFFFF;
+  border: 1px solid #C2DBFF;
+  border-radius: 20px;
+
 }
 
 .mid-main{
@@ -225,17 +281,24 @@
 
 .badge-2{
   padding: 8px;
-  border-radius: 20px;
-  font-size: 14px;
   color: #024f93;
+  font-size: 16px;
+  line-height: 160%;
+  /* identical to box height, or 26px */
+
+
+  color: #0040A1;
 }
 
 .active3{
-  background: rgba(36, 87, 188, 0.15);
+  width: 120px;
+  background: #EBF3FF;
+  border-radius: 40px;
+  text-align: center;
 }
 
 .lower-mid{
-  border: solid .5px;
+  border: 1px solid #C2DBFF;
   width: 80%;
   margin: 20px 45px;
   padding: 15px;
@@ -249,10 +312,8 @@
   margin-left: 20px;
   padding-bottom: 5px;
   cursor: pointer;
-  margin-bottom: -15px;
+  margin-bottom: -25px;
   color: gray;
-
-
 }
 
 .active1{
@@ -261,8 +322,9 @@
 }
 
 .breaker{
-  border: solid rgba(36, 87, 188, 0.99) .5px;
-  height: 30px;
+  width: 2px;
+  height: 40px;
+  background: #C2DBFF;
 }
 
 .top-header-icon-area{
@@ -293,48 +355,59 @@
   justify-content: center;
   /*border: solid;*/
   width: 100%;
-  border-bottom: solid .5px ;
+  background: #FFFFFF;
+  /* X Border */
+  border-bottom: 1px solid #C2DBFF;
+
+  box-shadow: inset 0px -1px 0px #D6DDEB;
+
 }
 .logo{
-  width: 150px;
-  margin-bottom: 20px;
-  margin-top: 20px;
+  width: 164px;
+  height: 33px;
 }
+
 .sidebar{
-  border-right:solid .5px;
-  width: 250px;
-  height: 110vh;
-}
-.inner-sidebar{
-  /*border: solid;*/
   display: flex;
   flex-direction: column;
-  gap: 15px;
-  margin-left: 20px;
-  transform: scale(.98);
+  align-items: flex-start;
+  padding: 32px 22px;
+  width: 272px;
+  border: 1px solid #C2DBFF;
+  height: 110vh;
+  /* Y Border */
+
+  filter: drop-shadow(1px 0px 0px #D3D6DB);
+  border-radius: 0px;
+}
+
+.inner-sidebar{
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  width: 272px;
 }
 
 .nav-items{
   display: flex;
+  flex-direction: row;
   align-items: start;
-  justify-content: start;
-  gap: 15px;
+  padding: 12px 16px;
+  gap: 16px;
+  width: 224px;
+  border-radius: 40px;
+  cursor: pointer;
   /*border: solid;*/
-  font-size: 14px;
-  /*padding: 10px;*/
-
-
 }
 
 .active{
-  background: rgba(36, 87, 188, 0.09);
-  border-radius: 30px;
-  height: 30px;
-  display: flex;
-  justify-content: start;
-  align-items: center;
-  padding-left: 5px;
+  background: #EBF3FF;
+  border: 1px solid #C2DBFF;
+  border-radius: 40px;
+  padding: 12px 16px;
+  gap: 16px;
 
+  width: 236px;
 
 }
 .nav-items-children{
@@ -374,7 +447,7 @@
 }
 
 .mid-header{
-  border-bottom: solid .5px rgba(36, 87, 188, 0.99);
+  border-bottom: solid 1px #C2DBFF;
   width: 92%;
   margin: 10px auto;
   display: flex;

@@ -7,16 +7,16 @@ defineProps({
   level: String,
   score: String,
   Attempt: String,
+  profile:String
 })
 
 const count = ref(0)
 </script>
 
 <template>
-
   <div class="data-card">
     <div class="data-card-info">
-      <div class="img-profile"></div>
+      <div class="img-profile" :style="{backgroundImage:`url(${profile})`}"></div>
       <div class="data-card-info-inner">
         <span class="info-name">{{name}}</span>
         <span class="info-info"> {{info}}</span>
@@ -35,8 +35,6 @@ const count = ref(0)
       <span class="info-info">{{Attempt}}</span>
     </div>
   </div>
-
-
 </template>
 
 <style scoped>
@@ -45,11 +43,18 @@ const count = ref(0)
 }
 
 .badge{
-  border: solid mediumpurple .5px;
+  border: 1px solid #C2DBFF;
   border-radius: 30px;
-  padding: 5px;
+  padding:10px;
   font-size: 12px;
-  color: mediumpurple;
+  /* or 22px */
+
+  text-align: center;
+
+  /* Brands/Primary */
+
+  color: #4640DE;
+
 }
 
 .k{
@@ -71,28 +76,27 @@ const count = ref(0)
 }
 
 .info-name{
-  font-size: 14px;
+  font-size: 16px;
   font-weight: 900;
 }
 
 .info-info{
-  font-size: 12px;
-  letter-spacing: .1rem;
-  font-weight: 500;
   color: rgba(128, 128, 128, 0.91);
+  font-weight: 400;
+  font-size: 12px;
 }
 
 .img-profile{
   width: 50px;
   height: 50px;
   border-radius: 360px;
-  background-color: #181818;
+  background-position: center;
+  background-size: cover;
+  /*background-color: #181818;*/
 }
 
 .data-card{
-  border: solid .5px;
   width: 95%;
-  border-radius:30px;
   display: flex;
   height: 100px;
   align-items: center;
@@ -101,5 +105,8 @@ const count = ref(0)
   padding-right: 20px;
   gap: 180px;
   margin-bottom: 20px;
+  background: #FFFFFF;
+  border: 1px solid #C2DBFF;
+  border-radius: 40px;
 }
 </style>
