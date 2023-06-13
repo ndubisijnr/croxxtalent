@@ -338,7 +338,14 @@
 }
 
 .system-panel{
-  font-size: 28px;
+  font-weight: 700;
+  font-size: 32px;
+  /* or 38px */
+
+  display: flex;
+  align-items: center;
+
+  color: #282929;
 }
 
 .top-header-inner{

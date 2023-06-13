@@ -2,4 +2,6 @@ body{
     padding: 0 !important;
     margin: 0 !important;
     zoom: 85% !important;
+    -moz-transform: scale(0.85); /* For Firefox */
+    -moz-transform-origin: 0 0; /* Set the origin of the transformation */
 }
