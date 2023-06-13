@@ -115,7 +115,8 @@
             <img :src="i.icon" />
             <div style="width: 100%;">
               <span class="link-name">{{ i.name }}</span>
-              <img  @click="data.dropdown = !data.dropdown, handleDropdown(i)" :src="data.dropdown ? '../src/assets/Button/vuesax/linear/vuesax/linear/Vector.svg':'../src/assets/Button/Vector.svg'" v-if="i.children" style="margin-left: 20px" />
+              <img  @click="data.dropdown = !data.dropdown, handleDropdown(i)" src="../src/assets/Button/vuesax/linear/vuesax/linear/Vector.svg" v-if="i.children && data.dropdown" style="margin-left: 20px" />
+              <img  @click="data.dropdown = !data.dropdown, handleDropdown(i)" src="../src/assets/Button/Vector.svg" v-else-if="i.children && !data.dropdown" style="margin-left: 20px" />
               <div v-if="i.children" class="nav-items-children-wrapper-active" :id="i.name">
                 <div v-for="j in i.children" class="nav-items-children">
                   <span class="span-link-name">{{j.name}}</span>
@@ -160,9 +161,8 @@
           <span @click="data.active = 'Down-holes tools'" class="item" :class="{'active1':data.active === 'Down-holes tools'}">Down-holes tools</span>
           <span @click="data.active = 'Pressure jobs'" class="item" :class="{'active1':data.active === 'Pressure jobs'}">Pressure jobs</span>
           <div class="navi">
-            <div class="chevron"> <i  class="fa-solid fa-chevron-left" style="color: white;"></i></div>
-            <div class="chevron"> <img  src="../src/assets/Button/vuesax/bold/vuesax/bold/Vector.svg" />
-            </div>
+            <div class="chevron"> <span style="color: white">&lt; </span> </div>
+            <div class="chevron"> <span style="color: white"> > </span> </div>
           </div>
         </div>
         <div class="mid-main" v-if="data.active === 'all'">
@@ -217,6 +217,7 @@
   align-items: center;
   justify-content: center;
   gap: 20px;
+  margin-top: 15px;
 }
 
 .pan{
@@ -335,6 +336,8 @@
 }
 .wrapper{
   display: flex;
+  width: 100%;
+  height: 100vh;
 }
 
 .system-panel{
@@ -349,11 +352,12 @@
 }
 
 .top-header-inner{
-  width: 90%;
+  width: 95%;
   /*border: solid crimson;*/
   display: flex;
   align-items: center;
   justify-content: space-between;
+  margin: 10px auto;
 }
 
 .top-header{
@@ -380,7 +384,7 @@
   align-items: flex-start;
   padding: 32px 22px;
   width: 272px;
-  border: 1px solid #C2DBFF;
+  border-right: 1px solid #C2DBFF;
   height: 110vh;
   /* Y Border */
 
